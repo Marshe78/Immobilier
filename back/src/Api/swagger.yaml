@@ -1,0 +1,420 @@
+openapi: 3.0.0
+info:
+  title: SuperBlog
+  description: 'Api php agence immobilière'
+  version: '1'
+servers:
+  -
+    url: 'localhost:8080'
+    description: Serveur
+paths:
+  /attribuer:
+    get:
+      summary: 'Retourne l''ensemble des attributions entre un rendez-vous & un bien'
+      operationId: e573972df402a1db16aa1e15efe8cbea
+      responses:
+        '200':
+          description: 'Retourne les IDs entre un rendez-vous & un bien'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Attribuer'
+        '404':
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                properties:
+                  message: { type: string, example: 'Route not found' }
+                type: object
+  '/attribuer/{id}':
+    get:
+      operationId: 98c854812f488363058e3c9472b5c7d5
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 'Retourne '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attribuer'
+  /utilisateur:
+    get:
+      summary: 'Retourne l''ensemble des biens'
+      operationId: 6e9ecaae5a7a9d5e9cf2cb97fe4ddb8b
+      responses:
+        '200':
+          description: 'Liste des Bien'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Bien'
+        '404':
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                properties:
+                  message: { type: string, example: 'Route not found' }
+                type: object
+  '/bien/{id}':
+    get:
+      operationId: 91975a4c448e75153a2037f60e4a1362
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 'Retourne un bien'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bien'
+  /gerer:
+    get:
+      summary: 'Retourne l''ensemble des utilisateurs'
+      operationId: 6328cbcc931025af6745d712ba71fede
+      responses:
+        '200':
+          description: 'Liste des ID entre un utilisateur & un bien'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Gerer'
+        '404':
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                properties:
+                  message: { type: string, example: 'Route not found' }
+                type: object
+  '/gerer/{id}':
+    get:
+      operationId: 209c1ff3b9cedab2e455d8b6ebd3ae19
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 'Retourne les id de l''utilisateur & l''id du bien'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gerer'
+  /optionbien:
+    get:
+      summary: 'Retourne l''ensemble des options'
+      operationId: b5e66e0dd8924a9df26976e2aad512bc
+      responses:
+        '200':
+          description: 'Liste des options'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Option_bien'
+        '404':
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                properties:
+                  message: { type: string, example: 'Route not found' }
+                type: object
+  '/optionbien/{id}':
+    get:
+      operationId: 50d9b35d41c2e66cb35ae1143e7ff3d0
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 'Retourne une option'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Option_bien'
+  /possede:
+    get:
+      summary: 'Retourne l''ensemble des utilisateurs'
+      operationId: 30a655501bd4c1b72a165ed944c0c329
+      responses:
+        '200':
+          description: 'Liste des ID entre Bien & Option bien'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Possede'
+        '404':
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                properties:
+                  message: { type: string, example: 'Route not found' }
+                type: object
+  '/possede/{id}':
+    get:
+      operationId: 2c8e7e43dbbebd00f0dee2246e1b4b58
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 'Retourne deux Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Possede'
+  /RendezVous:
+    get:
+      summary: 'Retourne l''ensemble des rendez-vous'
+      description: 'Renvoie l''ensemble des Rdv'
+      operationId: e2a9680c8a8a96433f22cfee50f3dca3
+      responses:
+        '200':
+          description: 'Liste des RendezVous'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RendezVous'
+        '404':
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                properties:
+                  message: { type: string, example: 'Route not found' }
+                type: object
+  '/RendezVous/{id}':
+    get:
+      summary: 'Retourne un rdv en fonction de son id'
+      operationId: fb99511397af747f5220f6e0d6dfe32a
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 'Retourne un rendez-vous de l''id en parametre'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RendezVous'
+  '/utilisateur/{id}':
+    get:
+      operationId: e2c52478379263f4e37750c9022fe0b3
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 'Retourne un utilisateur de l''id en parametre'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Utilisateur'
+  /utilisateur/sign:
+    post:
+      operationId: 187148565211afbfaef6b9fbbccb6548
+      requestBody:
+        request: 'Ajout d''un utilisateur'
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                Email:
+                  type: string
+                Password:
+                  type: string
+              type: object
+  /utilisateur/login:
+    post:
+      operationId: 9a995464389fad7be29c15abf6a4a493
+      requestBody:
+        request: Connexion
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                Email:
+                  type: string
+                Password:
+                  type: string
+              type: object
+      responses:
+        '200':
+          description: 'Retourne un token'
+          content:
+            application/json:
+              schema:
+                properties:
+                  Token: { type: string }
+                type: object
+components:
+  schemas:
+    Attribuer:
+      title: Attribuer
+      properties:
+        Id_bien:
+          type: integer
+          nullable: false
+        Id_rdv:
+          type: integer
+          nullable: false
+      type: object
+    Bien:
+      title: Bien
+      properties:
+        Id_bien:
+          type: integer
+          nullable: false
+        Image_bien:
+          type: string
+          nullable: true
+        Adresse:
+          type: string
+          nullable: false
+        Ville:
+          type: string
+          nullable: false
+        Type_bien:
+          type: string
+          nullable: false
+        Proprietaire:
+          type: string
+          nullable: false
+        Superficie:
+          type: integer
+          nullable: false
+        NbPiece:
+          type: integer
+          nullable: false
+        Prix:
+          type: string
+          nullable: false
+        Paiement:
+          type: string
+          nullable: false
+        Status_bien:
+          type: integer
+          nullable: false
+      type: object
+    Gerer:
+      title: Gerer
+      properties:
+        Id_utilisateur:
+          type: integer
+          nullable: false
+        Id_bien:
+          type: integer
+          nullable: false
+      type: object
+    Option_bien:
+      title: Option_bien
+      properties:
+        Id_option:
+          type: integer
+          nullable: false
+        Nom:
+          type: string
+          nullable: false
+      type: object
+    Possede:
+      title: Possede
+      properties:
+        Id_bien:
+          type: integer
+          nullable: false
+        Id_option:
+          type: integer
+          nullable: false
+        Possede:
+          type: boolean
+          nullable: false
+      type: object
+    RendezVous:
+      title: RendezVous
+      properties:
+        Id_rdv:
+          type: string
+          nullable: false
+        Date_rdv:
+          type: string
+          format: date
+          nullable: false
+        Annulation:
+          type: string
+          nullable: false
+        Description_rdv:
+          type: string
+          nullable: false
+        Id_utilisateur:
+          type: integer
+          nullable: true
+      type: object
+    Utilisateur:
+      title: Categorie
+      properties:
+        Id_utilisateur:
+          type: integer
+          nullable: false
+        Nom:
+          type: string
+          nullable: false
+        Prenom:
+          type: string
+          nullable: false
+        Email:
+          type: string
+          nullable: false
+        Password:
+          type: string
+          nullable: false
+        Role:
+          type: string
+          nullable: false
+      type: object

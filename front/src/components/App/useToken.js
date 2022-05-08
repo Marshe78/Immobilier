@@ -1,0 +1,49 @@
+import { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
+import jwt from 'jwt-decode'
+    
+
+
+export default function useToken() {
+    const navigate = useNavigate();
+    let navactv = false;
+    
+    const getToken = () => {
+        const tokenString = localStorage.getItem('token');
+        const userToken = JSON.parse(tokenString);
+        return userToken;
+    };
+
+    const [token, setToken] = useState(getToken());
+
+    const saveToken = userToken => {
+        localStorage.setItem('token', JSON.stringify(userToken));
+        setToken(userToken);
+    };
+
+    const decodeToken = () => {
+        if (token !== null) {
+            const user = jwt(token); 
+            return user;
+        } 
+        return null;
+    }
+    
+    const resetToken = () => {
+        localStorage.clear();
+        navactv = true;
+    }
+
+    useEffect(() => {
+        if(navactv)
+            navigate('/');
+    })
+    
+    return {
+      setToken: saveToken,
+      getToken,
+      resetToken,
+      decodeToken,
+      token
+    }
+}
